@@ -1,0 +1,73 @@
+
+header{
+  padding: 30px 0;
+  background: #141414;
+}
+header .contenedor{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logotipo{
+  margin-bottom: 0;
+  font-family: 'Bebas Neue', cursive;
+  font-weight: normal;
+  color:  #E50914;
+  font-size: 40px
+
+}
+#buscador{
+  width: 150px;
+}
+header nav a{
+  color: #AAA;
+  text-decoration: none;
+  margin-right: 20px;
+}
+header nav a span{
+  margin: 5px;
+}
+header nav a:hover,
+header nav a.activo{
+  color: #FFF;
+}
+#acceder,#btn-buscar{
+  /* margin-right: 20px; */
+  padding: 10px;
+  border-radius: 0.31em;
+  background:red;
+  color: white;
+  font-size: 1.12em;
+  cursor: pointer;
+}
+#registrarse{
+  padding: 10px;
+  border-radius: 0.31em;
+  background:#AAAAAA;
+  color: white;
+  font-size: 1.12em;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.d-flex{
+  justify-content: center;
+}
+
+/*--------------- modal------------------*/
+.modal-dialog{
+  opacity: .8;
+  filter: alpha(opacity=80);
+}
+.modal-content{
+  background-color: black;
+}
+.btn-danger{
+  background-color: red;
+}
+.modal-title{
+  color: #FFF;
+}
+
+#registrarse:hover{
+  color: #fff;
+}

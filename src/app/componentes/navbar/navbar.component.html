@@ -1,0 +1,164 @@
+<header>
+  <div class="contenedor">
+    <h2 class="logotipo" id="logo">Diego Caceres</h2>
+    <div class="collapse   d-flex justify-content-evenly" id="navbarScroll">
+      <form class="d-flex ">
+        <input class="form-control me-2  miInput" type="search" placeholder="Search" aria-label="Search" id="buscador" required="required">
+        <button class="btn btn-danger btn-search as" type="submit" id="btn-buscar" >Buscar</button>
+      </form>
+    </div>
+    <nav>
+      <a routerLink="/modal" id="enlaceAcceder">
+<!--        evento para abrir los modals-->
+        <button role="button" id="acceder" type="button" (click)="modal.open(contenido)"> Acceder</button></a>
+        <button role="button" id="registrarse" type="button" (click)="modal.open(modalRegistro)" >Resgistrarse</button>
+      <a routerLink="/inicio" class="activo">Inicio</a>
+      <a routerLink="/favoritos">Favoritos<span class="translate-middle badge"></span></a>
+    </nav>
+  </div>
+</header>
+
+<!--MODALS / FORMULARIOS-->
+<ng-template #contenido  let-modal>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true" class="modals">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Inicio de Sesión</h5>
+        </div>
+        <div class="modal-body">
+          <form  (ngSubmit)="onSubmit(inicioSesionForm)" #inicioSesionForm="ngForm"  id="form-login">
+            <div class="form-floating mb-3">
+              <input  #usuarioControl="ngModel"
+                     type="text"
+                     class="form-control"
+                     id="usuario"
+                     placeholder="usuario"
+                     name="usuario"
+                     #name = "ngModel"
+                     [(ngModel)]="persona.usuario"
+                      minlength="2"
+                      required>
+              <label>Usuario </label>
+            </div>
+            <div *ngIf="usuarioControl.invalid && usuarioControl.dirty" class="alert mt-1 p-0">
+              <p *ngIf="usuarioControl.errors['required']" style="color: #AAAAAA">*Campo Requerido</p>
+              <p *ngIf="usuarioControl.errors['minlength']" style="color: #AAAAAA">*Cantidad mínima de 2 caracteres</p>
+            </div>
+            <div class="form-floating">
+              <input  #passwordControl ="ngModel"
+                     type="password"
+                     class="form-control"
+                     id="floatingPassword"
+                     placeholder="Password"
+                     name="password"
+                     [(ngModel)]="persona.password"
+                      minlength="2"
+                      required>
+              <label for="floatingPassword">Password</label>
+              <div *ngIf="passwordControl.invalid && passwordControl.dirty" class="alert mt-1 p-0 pt-2">
+                <p *ngIf="passwordControl.errors['required']" style="color: #AAAAAA">*Campo Requerido</p>
+                <p *ngIf="passwordControl.errors['minlength']" style="color: #AAAAAA">*Cantidad mínima de 2 caracteres</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="modal.close(contenido)" data-bs-dismiss="modal">cerrar</button>
+              <button type="submit" class="btn btn-danger"  id="inicio-sesion" [disabled]="inicioSesionForm.invalid" (click)="modal.close(contenido)">Iniciar Sesion</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+<ng-template #modalRegistro let-modal>
+  <div class="modal fade modal1" data-bs-backdrop="static" id="staticBackdrop2" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true" class="modals">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel2">Registrarse</h5>
+        </div>
+        <div class="modal-body">
+          <form autocomplete="off" id="form-registro" [formGroup]="formGroup" >
+            <div class="form-floating mb-3">
+              <input type="text"
+                     class="form-control"
+                     placeholder="Ingrese su Nombre"
+                     name="nombre"
+                     formControlName="nombre"
+                     >
+              <div *ngIf="formGroup.controls['nombre'].errors && formGroup.controls['nombre'].dirty" class="alert mt-1 p-0">
+                <div *ngIf="formGroup.controls['nombre'].errors['required']"style="color: #AAAAAA">*Campo Requerido</div>
+                <div *ngIf="formGroup.controls['nombre'].errors['minlength']"style="color: #AAAAAA">*al menos ingresar {{minimocaracteres}} caracteres</div>
+                <div *ngIf="formGroup.controls['nombre'].errors['contieneEspacios']"style="color: #AAAAAA">*El campo no debe de contener espacios</div>
+              </div>
+              <label>Nombre </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text"
+                     class="form-control"
+                     placeholder="ingrese su Apellido"
+                     name="apellido"
+                     formControlName="apellido"
+                      >
+              <div *ngIf="formGroup.controls['apellido'].errors && formGroup.controls['apellido'].dirty" class="alert mt-1 p-0">
+                <div *ngIf="formGroup.controls['apellido'].errors['required']"style="color: #AAAAAA">*Campo Requerido</div>
+                <div *ngIf="formGroup.controls['apellido'].errors['minlength']"style="color: #AAAAAA">*al menos ingresar {{minimocaracteres}} caracteres</div>
+                <div *ngIf="formGroup.controls['apellido'].errors['contieneEspacios']"style="color: #AAAAAA">*El campo no debe de contener espacios</div>
+              </div>
+              <label>Apellido </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email"
+                     class="form-control"
+                     placeholder="name@example.com"
+                     name="email"
+                     formControlName="email"
+                     >
+              <div *ngIf="formGroup.controls['email'].errors && formGroup.controls['email'].dirty" class="alert mt-1 p-0">
+                <div *ngIf="formGroup.controls['email'].errors['email']"style="color: #AAAAAA">*Ingrese un Email válido</div>
+              </div>
+              <label>Email </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text"
+                     class="form-control"
+                     placeholder="usuario"
+                     name="usuario"
+                     formControlName="usuario"
+                     >
+              <div *ngIf="formGroup.controls['usuario'].errors && formGroup.controls['usuario'].dirty" class="alert mt-1 p-0">
+                <div *ngIf="formGroup.controls['usuario'].errors['required']"style="color: #AAAAAA">*Campo Requerido</div>
+                <div *ngIf="formGroup.controls['usuario'].errors['minlength']"style="color: #AAAAAA">*al menos ingresar {{minimocaracteres}} caracteres</div>
+                <div *ngIf="formGroup.controls['usuario'].errors['contieneEspacios']"style="color: #AAAAAA">*El campo no debe de contener espacios</div>
+              </div>
+              <label>Usuario </label>
+            </div>
+            <div class="form-floating">
+              <input type="password"
+                     class="form-control"
+                     placeholder="Password"
+                     name="password"
+                     formControlName="password"
+                     >
+              <div *ngIf="formGroup.controls['password'].errors && formGroup.controls['password'].dirty" class="alert mt-1 p-0">
+                <div *ngIf="formGroup.controls['password'].errors['required']"style="color: #AAAAAA">*Campo Requerido</div>
+                <div *ngIf="formGroup.controls['password'].errors['minlength']"style="color: #AAAAAA">*al menos ingresar {{minimocaracteresPass}} caracteres</div>
+                <div *ngIf="formGroup.controls['password'].errors['contieneEspacios']"style="color: #AAAAAA">*El campo no debe de contener espacios</div>
+              </div>
+              <label for="floatingPassword">Password</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close(modalRegistro)">cerrar</button>
+          <input type="submit" class="btn btn-danger" value="Crear Cuenta" class="btn btn-danger crear-cuenta" [disabled]="formGroup.invalid" (click)="enviarFormRF()" >
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

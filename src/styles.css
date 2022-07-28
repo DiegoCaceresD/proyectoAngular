@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+#body{
+  background: #141414;
+  font-family: 'Open Sans', sans-serif;
+}
+.contenedor{
+  width: 90%;
+  margin: auto;
+
+}
+a{
+  color: #141414;
+  text-decoration: none;
+}
+
+.main, main-inner, ng-image-slider{
+  height: 300px;
+}
